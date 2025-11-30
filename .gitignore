@@ -1,0 +1,20 @@
+# Angular build and cache
+dist/
+.angular/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDEs
+.vscode/
+.idea/
+
+# Environment files (opcionales, si los usas)
+.env
+*.env
+
+# OS
+.DS_Store
+Thumbs.db

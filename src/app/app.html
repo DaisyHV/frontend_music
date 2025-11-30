@@ -1,0 +1,29 @@
+<div class="formularioCompletar">
+  <h2>Formulario de Lista de Reproduccion</h2>
+  <form [formGroup]="listaForm" (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input type="text" formControlName="nombre" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Descripcion:</label>
+      <input type="text" formControlName="descripcion" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Canciones:</label>
+      <select name="canciones" formControlName="canciones" multiple class="form-control">
+        <option *ngFor="let cancion of cancionesDisponibles" [ngValue]="cancion">
+          {{ cancion.titulo }} - {{ cancion.artista }}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+
+</div>
+
+
+
+
+<router-outlet />
