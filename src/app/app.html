@@ -21,6 +21,34 @@
     <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
 
+</div >
+<div class="formularioCompletar">
+  <h2> Listas de Reproduccion</h2>
+
+ <table class="table">
+   <thead>
+
+
+   <tr>
+     <th>Nombre</th>
+     <th>Descripcion</th>
+     <th>Canciones</th>
+
+
+   </tr>
+   </thead>
+   <tbody>
+   <tr *ngFor="let lista of listasReproduccion">
+     <td>{{lista.nombre}}</td>
+     <td>{{lista.descripcion}}</td>
+     <td>{{getTitulosCanciones(lista.canciones)}}</td>
+
+   </tr>
+
+   </tbody>
+ </table>
+
+
 </div>
 
 

@@ -25,6 +25,7 @@ export class App implements OnInit {
 
   listaForm!: FormGroup;
   cancionesDisponibles: any;
+  listasReproduccion: any;
 
   constructor(
     public fb: FormBuilder,
@@ -49,13 +50,31 @@ export class App implements OnInit {
       }
     );
 
-  }
+   this.listas.gellAllListas().subscribe(
+     resp => {
+      this.listasReproduccion= resp;
+      },
+    error => {
+      console.error(error)}
+    );
+
+
+
+
+}
 
   guardar(): void {
     this.listas.saveLista(this.listaForm.value).subscribe(resp => {
+      this.listaForm.reset();
   },
   error => {console.error(error)}
   );
   }
+
+   getTitulosCanciones(canciones: { titulo: string }[]): string {
+      return canciones?.map(c => c.titulo).join(', ') || '';
+    }
+
+
 
 }
