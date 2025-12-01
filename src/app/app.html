@@ -51,7 +51,7 @@
    </tbody>
  </table>
 </div>
-<!-- Formulario de búsqueda -->
+<!-- Buscar Lista por nombre -->
 <div class="formularioCompletar">
   <h2>Buscar Lista de Reproduccion</h2>
   <form [formGroup]="buscarForm" (ngSubmit)="consultar()">
@@ -65,7 +65,7 @@
   </form>
 </div>
 
-<!-- Tabla para mostrar la lista encontrada -->
+<!-- Tabla para mostrar la lista anterior -->
 <div class="formularioCompletar" *ngIf="listaEncontrada">
   <h2>Lista encontrada</h2>
   <table class="table">
