@@ -26,6 +26,7 @@ export class App implements OnInit {
   listaForm!: FormGroup;
   cancionesDisponibles: any;
   listasReproduccion: any;
+  listaReproduccion: any = null
 
   constructor(
     public fb: FormBuilder,
@@ -66,6 +67,7 @@ export class App implements OnInit {
   guardar(): void {
     this.listas.saveLista(this.listaForm.value).subscribe(resp => {
       this.listaForm.reset();
+      this.listasReproduccion.push(resp);
   },
   error => {console.error(error)}
   );
@@ -76,5 +78,25 @@ export class App implements OnInit {
     }
 
 
+  eliminar(lista: any) {
+
+      this.listas.deleteLista(lista.nombre).subscribe({
+        next: (resp) => {
+          this.listasReproduccion = [...this.listasReproduccion.filter((x: any) => x.nombre !== lista.nombre)];
+
+        },
+        error: (err) => {
+          console.error('Error eliminando:', err);
+        }
+      });
+    }
+
+  consultar(nombre: string){
+    this.listas.gellListaByName(nombre).subscribe(resp => {
+      console.log(resp);
+      this.listaReproduccion = resp;
+
+    });
+}
 
 }

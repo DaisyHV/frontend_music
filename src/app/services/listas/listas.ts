@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +18,14 @@ export class Listas {
     public saveLista(lista: any): Observable<any> {
         return this.httpClient.post(this.API_SERVER, lista);
        }
+
+    public deleteLista(nombre: string): Observable<any> {
+        return this.httpClient.delete<any>(`${this.API_SERVER}/${nombre}`);
+       }
+
+     public gellListaByName(nombre: string): Observable<any> {
+         return this.httpClient.get(`${this.API_SERVER}/${nombre}`);
+     }
+
 
 }
