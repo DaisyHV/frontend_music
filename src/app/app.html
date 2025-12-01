@@ -19,11 +19,10 @@
       <br>
       <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
-
-
-  </form>
+</form>
 
 </div >
+
 <div class="formularioCompletar">
   <h2> Listas de Reproduccion</h2>
 
@@ -36,9 +35,6 @@
      <th>Descripcion</th>
      <th>Canciones</th>
      <th>Opciones</th>
-
-
-
    </tr>
    </thead>
    <tbody>
@@ -54,9 +50,42 @@
 
    </tbody>
  </table>
-
-
 </div>
+<!-- Formulario de búsqueda -->
+<div class="formularioCompletar">
+  <h2>Buscar Lista de Reproduccion</h2>
+  <form [formGroup]="buscarForm" (ngSubmit)="consultar()">
+    <div>
+      <label>Nombre:</label>
+      <input type="text" formControlName="nombre" class="form-control" />
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Consultar</button>
+    </div>
+  </form>
+</div>
+
+<!-- Tabla para mostrar la lista encontrada -->
+<div class="formularioCompletar" *ngIf="listaEncontrada">
+  <h2>Lista encontrada</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Canciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{listaEncontrada.nombre}}</td>
+      <td>{{listaEncontrada.descripcion}}</td>
+      <td>{{getTitulosCanciones(listaEncontrada.canciones)}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
 
 
 

@@ -24,9 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
 export class App implements OnInit {
 
   listaForm!: FormGroup;
+  buscarForm!: FormGroup;
   cancionesDisponibles: any;
   listasReproduccion: any;
-  listaReproduccion: any = null
+  listaEncontrada: any;
 
   constructor(
     public fb: FormBuilder,
@@ -40,6 +41,9 @@ export class App implements OnInit {
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
       canciones: [[], Validators.required]
+    });
+    this.buscarForm = this.fb.group({
+      nombre: ['', Validators.required]
     });
 
     this.canciones.getAllCanciones().subscribe(
@@ -73,8 +77,9 @@ export class App implements OnInit {
   );
   }
 
-   getTitulosCanciones(canciones: { titulo: string }[]): string {
-      return canciones?.map(c => c.titulo).join(', ') || '';
+   getTitulosCanciones(canciones: { titulo: string, artista: string, album: string, anno: string, genero:string }[]): string {
+      //return canciones?.map(c => c.titulo).join(', ') || '';
+      return canciones?.map(c => `${c.titulo} (${c.artista}) (${c.album}) (${c.anno}) (${c.genero})`).join(', ') || '';
     }
 
 
@@ -91,12 +96,17 @@ export class App implements OnInit {
       });
     }
 
-  consultar(nombre: string){
-    this.listas.gellListaByName(nombre).subscribe(resp => {
-      console.log(resp);
-      this.listaReproduccion = resp;
+ consultar(): void {
+     const nombre = this.buscarForm.value.nombre;
+     if (!nombre) return;
 
-    });
-}
+     this.listas.gellListaByName(nombre).subscribe(resp => {
+       //this.listaEncontrada = resp;
+       this.listaEncontrada = { ...resp };
+     }, error => {
+       console.error(error);
+       this.listaEncontrada = null;
+     });
+   }
 
 }
